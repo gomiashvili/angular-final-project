@@ -1,0 +1,17 @@
+<div class="wrapper">
+    <div class="posts-section">
+        <div><button>Add Post</button></div>
+        <div class="posts">
+            <div class="headings">
+                <div>POST'S USER</div>
+                <div>TITLE</div>
+                <div>BODY</div>
+            </div>
+            <div class="post" *ngFor="let post of posts">
+                <div>{{ post.userId}}</div>
+                <div> {{post.title}}</div>
+                <div>{{post.body}}</div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,21 @@
+header {
+    margin: 20px auto;
+    display: flex;
+    flex-direction: row;
+    gap: 20px;
+    justify-content: flex-end;
+
+    a {
+        font-weight: bold;
+        font-size: 18px;
+        padding: 10px;
+        cursor: pointer;
+
+        &:hover,
+        a:active {
+            color: white;
+            background-color: red;
+
+        }
+    }
+}
