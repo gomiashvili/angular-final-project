@@ -1,0 +1,30 @@
+<div class="wrapper">
+    <div class="comments-section">
+        <div class="left-sidebar">
+            <div class="arrow-img">
+                <img src="../../../../assets/images/arrow-back.svg">
+            </div>
+            <div class="details">
+                <h2>Title</h2>
+                <h4>{{currentPost?.title}}</h4>
+                <h2>Body</h2>
+                <h5>{{currentPost?.body}}</h5>
+            </div>
+            <button>Edit</button>
+        </div>
+        <div class="comments-sidebar">
+            <div class="comments">
+                <div *ngFor="let comment of comments" class="comment-box">
+                    <div class="comment-user">
+                        <img src="../../../../assets/images/profile_img.jpg">
+                    </div>
+                    <div class="comment-contents">
+                        <div class="comment-title">{{comment.name}}</div>
+                        <div class="comment-body">{{comment.body}}</div>
+                    </div>
+                </div>
+            </div>
+            <div class="your-comment"></div>
+        </div>
+    </div>
+</div>

@@ -1,14 +1,26 @@
 <div class="wrapper">
     <div class="posts-section">
-        <div><button>Add Post</button></div>
+        <div><button class="add-post" (click)="showWindow()">Add Post</button></div>
+        <div class="post-window" *ngIf="hidden">
+            <label for="author">Post Author
+                <input type="text" id="author">
+            </label>
+            <label for="title">Title
+                <input type="text" id="title">
+            </label>
+            <label for="body">Body
+                <input type="text" id="body">
+            </label>
+            <button class="add">Add</button>
+        </div>
         <div class="posts">
             <div class="headings">
                 <div>POST'S USER</div>
                 <div>TITLE</div>
                 <div>BODY</div>
             </div>
-            <div class="post" *ngFor="let post of posts">
-                <div>{{ post.userId}}</div>
+            <div class="post" *ngFor="let post of posts" [routerLink]="['/posts', post.id]">
+                <div>{{ getNameById(post.userId)}}</div>
                 <div> {{post.title}}</div>
                 <div>{{post.body}}</div>
             </div>

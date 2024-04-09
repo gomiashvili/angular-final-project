@@ -3,6 +3,7 @@
     display: flex;
     flex-direction: column;
     align-items: center;
+    gap: 30px;
 }
 
 .headings {
@@ -27,10 +28,49 @@
     display: flex;
     border: 1px solid black;
     border-bottom: none;
+
+    &:nth-child(even) {
+        background-color: bisque;
+    }
 }
 
 .post>div {
     width: 33%;
     height: 150px;
     overflow: hidden;
+}
+
+.add-post {
+    background-color: blue;
+    color: #fff;
+    padding: 10px;
+    border: none;
+    outline: none;
+}
+
+.post-window {
+    width: 50%;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    background-color: #4da6ff;
+    padding: 20px;
+
+    input {
+        width: 100%;
+        border-radius: 10px;
+        height: 40px;
+        border: none;
+        outline: none;
+        margin-top: 10px;
+    }
+
+    .add {
+        width: 50px;
+        padding: 10px;
+        background-color: red;
+        color: #fff;
+        border: none;
+        outline: none;
+    }
 }
