@@ -1,0 +1,14 @@
+<div class="wrapper">
+    <div class="albums">
+        <div class="album-headings">
+            <div>ALBUM'S USER</div>
+            <div>TITLE</div>
+            <div>NUMBER OF PHOTOS</div>
+        </div>
+        <div class="album" *ngFor="let album of albums" [routerLink]="['/albums', album.id] ">
+            <div>{{ getNameById(album.userId)}}</div>
+            <div> {{album.title}}</div>
+            <div>50</div>
+        </div>
+    </div>
+</div>

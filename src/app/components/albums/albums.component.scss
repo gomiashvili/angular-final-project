@@ -1,0 +1,41 @@
+.album {
+    display: flex;
+    width: 100%;
+    display: flex;
+    border: 1px solid black;
+    border-bottom: none;
+
+    &:nth-child(even) {
+        background-color: bisque;
+    }
+}
+
+.album-headings {
+    width: 100%;
+    display: flex;
+    gap: 30px;
+    border: 1px solid black;
+    border-bottom: none;
+    text-align: center;
+    font-weight: bold;
+    color: #fff;
+    background-color: #1aa3ff;
+    padding: 15px;
+}
+
+.album-headings>div {
+    width: 33%;
+}
+
+.album>div {
+    width: 33%;
+    height: 150px;
+    overflow: hidden;
+
+}
+
+.albums {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+}

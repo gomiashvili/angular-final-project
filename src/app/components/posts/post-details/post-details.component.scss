@@ -13,31 +13,70 @@
     border: 1px solid black;
 }
 
+.comment-contents {
+    width: 65%;
+}
+
 .comment-user {
     width: 40px;
     height: 40px;
-
-    img {
-        width: 100%;
-        height: 100%;
-    }
+    background-image: url('../../../../assets/images/profile_img.jpg');
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
 }
 
-.comment-title,
-.comment-body {
-    width: 50%;
+.your-comment {
+    height: 35%;
 }
 
 .comments {
     width: 100%;
-    height: 55vh;
+    height: 65%;
     overflow-y: scroll;
+}
+
+.grey {
+    height: 90%;
+    width: 100%;
+    margin: auto;
+    display: flex;
+    justify-content: space-around;
+    background-color: lightgrey;
+
+    h3 {
+        display: block;
+        background-color: white;
+    }
+
+    form {
+        width: 80%;
+        display: flex;
+        flex-direction: column;
+
+        input,
+        textarea {
+            width: 100%;
+            border: none;
+            border-bottom: 1px solid black;
+            outline: none;
+        }
+
+        input {
+            height: 25px;
+        }
+
+        textarea {
+            height: 50px;
+        }
+    }
 }
 
 .left-sidebar,
 .comments-sidebar {
     width: 45%;
     border: 1px solid black;
+    height: 100%;
 }
 
 .arrow-img {

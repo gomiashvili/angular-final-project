@@ -3,15 +3,15 @@
         <div><button class="add-post" (click)="showWindow()">Add Post</button></div>
         <div class="post-window" *ngIf="hidden">
             <label for="author">Post Author
-                <input type="text" id="author">
+                <input type="text" id="author" [(ngModel)]="postAuthor">
             </label>
             <label for="title">Title
-                <input type="text" id="title">
+                <input type="text" id="title" [(ngModel)]="postTitle">
             </label>
             <label for="body">Body
-                <input type="text" id="body">
+                <input type="text" id="body" [(ngModel)]="postBody">
             </label>
-            <button class="add">Add</button>
+            <button class="add" (click)="addPost()">Add</button>
         </div>
         <div class="posts">
             <div class="headings">

@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Route } from '@angular/router';
 import { Post } from 'src/app/interfaces/post.interface';
+import { Comment } from 'src/app/interfaces/comment.interface'
 import { ApiService } from 'src/app/services/api.service';
+import { PostServiceService } from 'src/app/services/post-service.service';
 
 @Component({
   selector: 'app-post-details',
@@ -10,9 +12,12 @@ import { ApiService } from 'src/app/services/api.service';
 })
 export class PostDetailsComponent implements OnInit {
   currentPost?: Post;
-  comments!: any[];
+  comments!: Comment[];
+  newCommentName: string = '';
+  newCommentBody: string = '';
+  comment!: Comment;
 
-  constructor(private apiService: ApiService, private route: ActivatedRoute,) { }
+  constructor(private apiService: ApiService, private route: ActivatedRoute, private postService: PostServiceService) { }
 
   ngOnInit() {
     this.route.data.subscribe(({ post }) => {
@@ -20,7 +25,6 @@ export class PostDetailsComponent implements OnInit {
     })
     this.route.data.subscribe(({ comments }) => {
       this.comments = comments;
-      console.log(this.comments);
     })
 
     // this.apiService.getCommentsById(this.currentPost?.id).subscribe((comments) => {
@@ -36,5 +40,29 @@ export class PostDetailsComponent implements OnInit {
 
     // console.log(this.currentPost);
   }
+  addNewComment() {
+    this.comment = {
+      postId: Math.floor(Math.random() * 100),
+      id: Math.floor(Math.random() * 100),
+      name: this.newCommentName,
+      email: '',
+      body: this.newCommentBody
+    },
+      this.newCommentName = '';
+    this.newCommentBody = '';
 
+    this.postService.sendData(this.comment, this.currentPost?.id).subscribe(
+      response => {
+        console.log('Data sent successfully!');
+
+      },
+      error => {
+        console.error('Error while sending data:', error);
+
+      }
+    );
+    this.apiService.getCommentsById(this.currentPost?.id).subscribe((comments) => {
+      this.comments = comments;
+    })
+  }
 }

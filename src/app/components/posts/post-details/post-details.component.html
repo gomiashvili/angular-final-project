@@ -16,7 +16,7 @@
             <div class="comments">
                 <div *ngFor="let comment of comments" class="comment-box">
                     <div class="comment-user">
-                        <img src="../../../../assets/images/profile_img.jpg">
+                        <!-- <img src="../../../../assets/images/profile_img.jpg"> -->
                     </div>
                     <div class="comment-contents">
                         <div class="comment-title">{{comment.name}}</div>
@@ -24,7 +24,23 @@
                     </div>
                 </div>
             </div>
-            <div class="your-comment"></div>
+            <div class="your-comment">
+                <h3>Add Comment</h3>
+                <div class="grey">
+                    <div class="comment-user"></div>
+                    <form>
+                        <label for="comment_name">Name
+                            <input type="text" id="comment_name" [ngModelOptions]="{standalone: true}"
+                                [(ngModel)]="newCommentName">
+                        </label>
+                        <label for="comment_body">Body
+                            <textarea type="text" id="comment_body" [ngModelOptions]="{standalone: true}"
+                                [(ngModel)]="newCommentBody"></textarea>
+                        </label>
+                        <button (click)="addNewComment()">Add</button>
+                    </form>
+                </div>
+            </div>
         </div>
     </div>
 </div>

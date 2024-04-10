@@ -9,6 +9,9 @@ import { PostsComponent } from './components/posts/PostsComponent';
 import { HttpClientModule } from '@angular/common/http';
 import { PostDetailsComponent } from './components/posts/post-details/post-details.component';
 import { RouterModule } from '@angular/router';
+import { FormsModule } from '@angular/forms';
+import { AlbumsComponent } from './components/albums/albums.component';
+import { AlbumDetailsComponent } from './components/album-details/album-details.component';
 
 @NgModule({
   declarations: [
@@ -16,13 +19,16 @@ import { RouterModule } from '@angular/router';
     HomeComponent,
     HeaderComponent,
     PostsComponent,
-    PostDetailsComponent
+    PostDetailsComponent,
+    AlbumsComponent,
+    AlbumDetailsComponent,
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
-    RouterModule
+    RouterModule,
+    FormsModule,
   ],
   providers: [],
   bootstrap: [AppComponent]
