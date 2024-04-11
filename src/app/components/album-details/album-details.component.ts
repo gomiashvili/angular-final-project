@@ -18,9 +18,9 @@ export class AlbumDetailsComponent implements OnInit {
     this.route.data.subscribe(({ album }) => {
       this.currentAlbum = album;
     })
-    this.apiService.getAlbumById(this.currentAlbum.id).subscribe((photos) => {
-      this.photos = photos;
-    });
+    // this.apiService.getAlbumById(this.currentAlbum.id).subscribe((photos) => {
+    //   this.photos = photos;
+    // });
   }
 
 }
