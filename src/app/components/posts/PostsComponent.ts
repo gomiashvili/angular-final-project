@@ -18,7 +18,7 @@ export class PostsComponent implements OnInit {
     postTitle!: string;
     postAuthor!: string;
     postBody!: string;
-    post!: Post;
+    newPost!: Post;
 
 
     constructor(private apiService: ApiService, private postService: PostService, private saveService: SaveService) { }
@@ -56,13 +56,14 @@ export class PostsComponent implements OnInit {
             },
             ...this.users,
         ]
+        this.newPost = {
+            userId: newUserId,
+            id: newPostId,
+            title: this.postTitle,
+            body: this.postBody
+        }
         this.posts = [
-            {
-                userId: newUserId,
-                id: newPostId,
-                title: this.postTitle,
-                body: this.postBody
-            },
+            this.newPost,
             ...this.posts,
         ];
         // const newUser: User = {
@@ -89,7 +90,7 @@ export class PostsComponent implements OnInit {
         this.postBody = '';
 
 
-        this.postService.sendPost(this.post).subscribe(
+        this.postService.sendPost(this.newPost).subscribe(
             response => {
                 console.log('Data sent successfully!', response);
 

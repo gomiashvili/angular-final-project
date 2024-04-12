@@ -4,6 +4,7 @@ import { Post } from 'src/app/interfaces/post.interface';
 import { Comment } from 'src/app/interfaces/comment.interface'
 import { ApiService } from 'src/app/services/api.service';
 import { PostServiceService } from 'src/app/services/comment.service';
+import { SaveService } from 'src/app/services/save.service';
 
 @Component({
   selector: 'app-post-details',
@@ -11,21 +12,25 @@ import { PostServiceService } from 'src/app/services/comment.service';
   styleUrls: ['./post-details.component.scss']
 })
 export class PostDetailsComponent implements OnInit {
-  currentPost?: Post;
+  currentPost!: Post;
   comments!: Comment[];
   newCommentName: string = '';
   newCommentBody: string = '';
-  comment!: Comment;
+  newComment!: Comment;
 
-  constructor(private apiService: ApiService, private route: ActivatedRoute, private postService: PostServiceService) { }
+  constructor(private apiService: ApiService, private route: ActivatedRoute, private postService: PostServiceService, private saveService: SaveService) { }
 
   ngOnInit() {
     this.route.data.subscribe(({ post }) => {
       this.currentPost = post;
     })
-    this.route.data.subscribe(({ comments }) => {
-      this.comments = comments;
-    })
+    if (this.saveService.isNewComment === false) {
+      this.route.data.subscribe(({ comments }) => {
+        this.comments = comments;
+      })
+    } else {
+      this.comments = this.saveService.savedComments;
+    }
 
     // this.apiService.getCommentsById(this.currentPost?.id).subscribe((comments) => {
     //   this.comments = comments;
@@ -41,17 +46,23 @@ export class PostDetailsComponent implements OnInit {
     // console.log(this.currentPost);
   }
   addNewComment() {
-    this.comment = {
-      postId: Math.floor(Math.random() * 100),
-      id: Math.floor(Math.random() * 100),
+    this.newComment = {
+      postId: this.currentPost.id,
+      id: this.comments.length + 1,
       name: this.newCommentName,
       email: '',
       body: this.newCommentBody
-    },
-      this.newCommentName = '';
+    };
+    this.comments = [
+      this.newComment,
+      ...this.comments
+    ];
+
+    this.saveService.savedComments = this.comments;
+    this.newCommentName = '';
     this.newCommentBody = '';
 
-    this.postService.sendData(this.comment, this.currentPost?.id).subscribe(
+    this.postService.sendData(this.newComment, this.currentPost?.id).subscribe(
       response => {
         console.log('Data sent successfully!');
 
@@ -61,8 +72,6 @@ export class PostDetailsComponent implements OnInit {
 
       }
     );
-    this.apiService.getCommentsById(this.currentPost?.id).subscribe((comments) => {
-      this.comments = comments;
-    })
+
   }
 }

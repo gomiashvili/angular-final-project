@@ -11,6 +11,7 @@ export class SaveService {
   savedComments: Comment[] = [];
   savedUsers: User[] = [];
   isChanged: boolean = false;
+  isNewComment: boolean = false;
 
   // saveData = {
 
