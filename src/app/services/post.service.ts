@@ -13,4 +13,8 @@ export class PostService {
     return this.http.post<Post>(`${this.apiUrlForPost}`, data);
 
   }
+  updatePost(data: Post): Observable<Post> {
+    return this.http.put<Post>(`${this.apiUrlForPost}/${data.id}`, data);
+
+  }
 }

@@ -12,6 +12,7 @@ export class SaveService {
   savedUsers: User[] = [];
   isChanged: boolean = false;
   isNewComment: boolean = false;
+  isPostChanged: boolean = false;
 
   // saveData = {
 

@@ -1,0 +1,10 @@
+<div class="wrapper">
+    <div class="todos-list" *ngFor="let todo of todos">
+        <div class="title-div"><span class="heading">Title:</span>{{todo.title}}</div>
+        <div class="completion-div"><span class="heading">Completion:</span><span class="comp">
+                <img
+                    [src]="todo.completed ? '../../../assets/images/checkmark-svgrepo-com.svg' :  '../../../assets/images/x-small-svgrepo-com.svg'">
+            </span>
+        </div>
+    </div>
+</div>

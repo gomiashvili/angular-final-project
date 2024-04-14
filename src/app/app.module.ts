@@ -12,6 +12,7 @@ import { RouterModule } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 import { AlbumsComponent } from './components/albums/albums.component';
 import { AlbumDetailsComponent } from './components/album-details/album-details.component';
+import { TodosComponent } from './components/todos/todos.component';
 
 @NgModule({
   declarations: [
@@ -22,6 +23,7 @@ import { AlbumDetailsComponent } from './components/album-details/album-details.
     PostDetailsComponent,
     AlbumsComponent,
     AlbumDetailsComponent,
+    TodosComponent,
   ],
   imports: [
     BrowserModule,

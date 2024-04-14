@@ -2,11 +2,10 @@
     display: flex;
     width: 100%;
     display: flex;
-    border: 1px solid black;
     border-bottom: none;
 
-    &:nth-child(even) {
-        background-color: bisque;
+    &:nth-child(odd) {
+        background-color: #d1e0e0;
     }
 }
 
@@ -14,7 +13,6 @@
     width: 100%;
     display: flex;
     gap: 30px;
-    border: 1px solid black;
     border-bottom: none;
     text-align: center;
     font-weight: bold;
@@ -29,8 +27,9 @@
 
 .album>div {
     width: 33%;
-    height: 150px;
+    height: 100px;
     overflow: hidden;
+    text-align: center;
 
 }
 

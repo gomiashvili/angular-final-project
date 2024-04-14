@@ -7,6 +7,8 @@ import { postResolver } from './guards/post-resolve.guard';
 import { CommentsResolver } from './guards/comments-resolve.guard';
 import { AlbumsComponent } from './components/albums/albums.component';
 import { AlbumDetailsComponent } from './components/album-details/album-details.component';
+import { PhotosResolveGuard } from './guards/photos-resolve.guard';
+import { TodosComponent } from './components/todos/todos.component';
 
 const routes: Routes = [
   { path: '', component: HomeComponent },
@@ -16,7 +18,11 @@ const routes: Routes = [
     resolve: { post: postResolver, comments: CommentsResolver }
   },
   { path: 'albums', component: AlbumsComponent },
-  { path: 'albums/:id', component: AlbumDetailsComponent }
+  {
+    path: 'albums/:id', component: AlbumDetailsComponent,
+    resolve: { photos: PhotosResolveGuard }
+  },
+  { path: 'todos', component: TodosComponent }
 ];
 
 @NgModule({

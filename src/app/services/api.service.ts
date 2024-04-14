@@ -6,6 +6,7 @@ import { User } from '../interfaces/user.interface';
 import { Comment } from '../interfaces/comment.interface';
 import { Album } from '../interfaces/album.interface';
 import { Photos } from '../interfaces/photos.interface';
+import { ToDos } from '../interfaces/todos.interface';
 
 @Injectable({
   providedIn: 'root'
@@ -37,5 +38,8 @@ export class ApiService {
   }
   getCommentsById(postId: any) {
     return this.http.get<Comment[]>(`https://jsonplaceholder.typicode.com/comments?postId=${postId}`);
+  }
+  getToDos(): Observable<ToDos[]> {
+    return this.http.get<ToDos[]>('https://jsonplaceholder.typicode.com/todos');
   }
 }

@@ -6,7 +6,7 @@ import { Observable } from 'rxjs';
 @Injectable({
   providedIn: 'root'
 })
-export class PostServiceService {
+export class CommentService {
   constructor(private http: HttpClient) { }
   sendData(data: Comment, postId: any): Observable<Comment> {
     let apiUrlForComment = `https://jsonplaceholder.typicode.com/posts/${postId}/comments`;

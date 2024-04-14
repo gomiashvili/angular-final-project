@@ -26,7 +26,10 @@ export class PostsComponent implements OnInit {
         this.hidden = !this.hidden;
     }
     ngOnInit() {
-        if (this.saveService.isChanged == false) {
+
+        this.apiService.getUsers().subscribe((data) => this.saveService.savedUsers = data);
+
+        if (this.saveService.isChanged == false && this.saveService.isPostChanged == false) {
             this.apiService.getPosts().subscribe((posts) => {
                 this.posts = posts;
 
@@ -92,7 +95,7 @@ export class PostsComponent implements OnInit {
 
         this.postService.sendPost(this.newPost).subscribe(
             response => {
-                console.log('Data sent successfully!', response);
+                console.log('Post sent successfully!', response);
 
             },
             error => {
