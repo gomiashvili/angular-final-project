@@ -3,5 +3,4 @@ export interface ToDos {
     id: number,
     title: string,
     completed: boolean,
-    statusImageUrl?: string
 }

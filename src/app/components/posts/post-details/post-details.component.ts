@@ -26,26 +26,27 @@ export class PostDetailsComponent implements OnInit {
 
   ngOnInit() {
     this.scrollToBottom();
-    if (this.saveService.isPostChanged === false) {
+    const currentId = Number(this.route?.snapshot.paramMap.get('id'));
+
+    if (this.saveService.isPostChanged === false) {  //if there is no new post, get data from api
       this.route.data.subscribe(({ post }) => {
         this.currentPost = post;
       });
       this.apiService.getPosts().subscribe((data) =>
         this.saveService.savedPosts = data);
     } else {
-      const currentId = Number(this.route?.snapshot.paramMap.get('id'));
       this.currentPost = this.saveService.savedPosts.find(f => f.id == currentId) ?? this.currentPost;
     }
 
 
-    if (this.saveService.isNewComment === false) {
+    if (this.saveService.isNewComment.find(element => element.id == currentId)?.status == false ||
+      this.saveService.isNewComment.find(element => element.id == currentId)?.status == undefined) {
       this.route.data.subscribe(({ comments }) => {
         this.comments = comments;
       })
     } else {
-      this.comments = this.saveService.savedComments;
+      this.comments = this.saveService.allComments[currentId];
     }
-
     // this.apiService.getCommentsById(this.currentPost?.id).subscribe((comments) => {
     //   this.comments = comments;
     //   console.log(this.currentPost?.id);
@@ -65,8 +66,11 @@ export class PostDetailsComponent implements OnInit {
       container.scrollTop = container.scrollHeight;
     });
   }
+  goBack() {
+    window.history.back();
+  }
   addNewComment() {
-    this.saveService.isNewComment = true;
+    this.saveService.isNewComment.push({ id: this.currentPost.id, status: true });
     this.newComment = {
       postId: this.currentPost?.id,
       id: this.comments.length + 1,
@@ -78,6 +82,8 @@ export class PostDetailsComponent implements OnInit {
       ...this.comments,
       this.newComment,
     ];
+    this.saveService.allComments.splice(this.currentPost.id, 0, this.comments);
+    console.log(this.saveService.allComments);
     this.scrollToBottom();
     this.saveService.savedComments = this.comments;
     this.newCommentName = '';

@@ -3,7 +3,7 @@
         <div class="comments-section">
             <div class="left-sidebar">
                 <div class="details" *ngIf="!showEditWindow">
-                    <div class="arrow-img">
+                    <div class="arrow-img" (click)="goBack()">
                         <img src="../../../../assets/images/arrow-back.svg">
                     </div>
                     <h2>Title</h2>
