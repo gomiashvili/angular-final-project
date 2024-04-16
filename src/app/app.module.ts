@@ -13,6 +13,8 @@ import { FormsModule } from '@angular/forms';
 import { AlbumsComponent } from './components/albums/albums.component';
 import { AlbumDetailsComponent } from './components/album-details/album-details.component';
 import { TodosComponent } from './components/todos/todos.component';
+import { LogoComponent } from './components/logo/logo.component';
+import { MenuComponent } from './components/menu/menu.component';
 
 @NgModule({
   declarations: [
@@ -24,6 +26,8 @@ import { TodosComponent } from './components/todos/todos.component';
     AlbumsComponent,
     AlbumDetailsComponent,
     TodosComponent,
+    LogoComponent,
+    MenuComponent,
   ],
   imports: [
     BrowserModule,

@@ -6,6 +6,7 @@ import { ApiService } from 'src/app/services/api.service';
 import { CommentService } from 'src/app/services/comment.service';
 import { SaveService } from 'src/app/services/save.service';
 import { PostService } from 'src/app/services/post.service';
+import { catchError, of, tap } from 'rxjs';
 
 @Component({
   selector: 'app-post-details',
@@ -14,11 +15,11 @@ import { PostService } from 'src/app/services/post.service';
 })
 export class PostDetailsComponent implements OnInit {
   currentPost!: Post;
-  comments!: Comment[];
-  newCommentName: string = '';
-  newCommentBody: string = '';
-  postNewTitle: string = '';
-  postNewBody: string = '';
+  comments!: Comment[];  //current post comments
+  newCommentName: string = '';  //ngModel name for name of new comment
+  newCommentBody: string = '';  //ngModel name for body of new comment
+  postNewTitle: string = '';  //ngModel name for edited post title
+  postNewBody: string = '';  //ngModel name for edited post body
   newComment!: Comment;
   showEditWindow: boolean = false;
   constructor(private apiService: ApiService, private route: ActivatedRoute, private commentService: CommentService,
@@ -27,8 +28,8 @@ export class PostDetailsComponent implements OnInit {
   ngOnInit() {
     this.scrollToBottom();
     const currentId = Number(this.route?.snapshot.paramMap.get('id'));
-
-    if (this.saveService.isPostChanged === false) {  //if there is no new post, get data from api
+    //if there is no new post, get data from api, else from service
+    if (this.saveService.isPostChanged === false) {
       this.route.data.subscribe(({ post }) => {
         this.currentPost = post;
       });
@@ -38,27 +39,18 @@ export class PostDetailsComponent implements OnInit {
       this.currentPost = this.saveService.savedPosts.find(f => f.id == currentId) ?? this.currentPost;
     }
 
-
-    if (this.saveService.isNewComment.find(element => element.id == currentId)?.status == false ||
-      this.saveService.isNewComment.find(element => element.id == currentId)?.status == undefined) {
+    //if there is no new commment, get data from api, else from service
+    if (this.saveService.isNewComment.find(f => f.id == currentId)?.changed == false ||
+      this.saveService.isNewComment.find(f => f.id == currentId)?.changed == undefined) {
       this.route.data.subscribe(({ comments }) => {
         this.comments = comments;
       })
     } else {
       this.comments = this.saveService.allComments[currentId];
     }
-    // this.apiService.getCommentsById(this.currentPost?.id).subscribe((comments) => {
-    //   this.comments = comments;
-    //   console.log(this.currentPost?.id);
-    // });
-    // console.log(this.comments);
 
 
-    // const postId = Number(this.route.snapshot.paramMap.get('id'));
-    // console.log(postId)
-    // this.currentPost = this.posts?.find(obj => obj.id == postId);
 
-    // console.log(this.currentPost);
   }
   private scrollToBottom(): void {
     setTimeout(() => {
@@ -70,7 +62,7 @@ export class PostDetailsComponent implements OnInit {
     window.history.back();
   }
   addNewComment() {
-    this.saveService.isNewComment.push({ id: this.currentPost.id, status: true });
+    this.saveService.isNewComment.push({ id: this.currentPost.id, changed: true });  //comments array for current post is changed
     this.newComment = {
       postId: this.currentPost?.id,
       id: this.comments.length + 1,
@@ -82,25 +74,29 @@ export class PostDetailsComponent implements OnInit {
       ...this.comments,
       this.newComment,
     ];
-    this.saveService.allComments.splice(this.currentPost.id, 0, this.comments);
+    this.saveService.allComments[this.currentPost.id] = this.comments;  //saved updated comment array 
+
     console.log(this.saveService.allComments);
-    this.scrollToBottom();
+
+
     this.saveService.savedComments = this.comments;
+
+    this.scrollToBottom();
     this.newCommentName = '';
     this.newCommentBody = '';
 
-    this.commentService.sendData(this.newComment, this.currentPost?.id).subscribe(
-      response => {
-        console.log('Comment added successfully!');
 
-      },
-      error => {
-        console.error('Error while adding comment', error);
-
-      }
-    );
+    this.commentService.sendData(this.newComment, this.currentPost?.id).pipe(
+      tap(() => console.log('Comment added successfully!')),
+      catchError(error => {
+        console.error('Error while adding comment:', error);
+        return of(null);
+      })
+    ).subscribe();
 
   }
+
+
   editPost() {
     this.showEditWindow = true;
   }
@@ -119,15 +115,14 @@ export class PostDetailsComponent implements OnInit {
     if (index != -1) {
       this.saveService.savedPosts[index] = this.currentPost;
     }
-    this.postService.updatePost(this.currentPost).subscribe(
-      response => {
-        console.log('Current post updated successfully!');
 
-      },
-      error => {
+    this.postService.updatePost(this.currentPost).pipe(
+      tap(() => console.log('Current post updated successfully!')),
+      catchError(error => {
         console.error('Error while updating data:', error);
-
-      }
-    );
+        return of(null); // Return an observable to prevent errors from propagating
+      })
+    ).subscribe();
+    console.log(this.currentPost)
   }
 }

@@ -13,7 +13,7 @@ export class SaveService {
   allComments: Comment[][] = new Array(50).fill([]);
   savedUsers: User[] = [];
   isChanged: boolean = false;
-  isNewComment: IsNewComment[] = [{ id: 0, status: false }];
+  isNewComment: IsNewComment[] = [{ id: 0, changed: false }];
   isPostChanged: boolean = false;
 
   // saveData = {
