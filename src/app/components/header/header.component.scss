@@ -1,8 +1,14 @@
-header {
+.header-wrapper {
     margin: 20px auto;
+    width: 80%;
     padding: 10px;
     display: flex;
     flex-direction: row;
     justify-content: space-between;
     align-items: center;
+}
+
+header {
+    width: 100%;
+    box-shadow: 3px 3px 5px lightgray;
 }

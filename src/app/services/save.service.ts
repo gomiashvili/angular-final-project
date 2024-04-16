@@ -10,7 +10,7 @@ import { IsNewComment } from '../interfaces/commentChanges';
 export class SaveService {
   savedPosts: Post[] = [];
   savedComments: Comment[] = [];
-  allComments: Comment[][] = new Array(50).fill([]);
+  allComments: Comment[][] = new Array(51).fill([]);
   savedUsers: User[] = [];
   isChanged: boolean = false;
   isNewComment: IsNewComment[] = [{ id: 0, changed: false }];

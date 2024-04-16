@@ -30,6 +30,11 @@ export class ApiService {
   getAlbumById(id: number): Observable<Photos[]> {
     return this.http.get<Photos[]>(`https://jsonplaceholder.typicode.com/albums/${id}/photos`);
   }
+  getPhotos(): Observable<Photos[]> {
+    return this.http.get<Photos[]>(
+      'https://jsonplaceholder.typicode.com/photos'
+    );
+  }
   getNameById(nameId: number) {
     return this.users?.find(obj => obj.id === nameId)?.name;
   }

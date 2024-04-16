@@ -1,8 +1,11 @@
 .album {
     display: flex;
     width: 100%;
+    margin: auto;
     display: flex;
     border-bottom: none;
+    background-color: #fff;
+    justify-content: space-between;
 
     &:nth-child(odd) {
         background-color: #d1e0e0;
@@ -30,11 +33,15 @@
     height: 100px;
     overflow: hidden;
     text-align: center;
-
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .albums {
     display: flex;
     flex-direction: column;
-    width: 100%;
+    width: 90%;
+    margin: auto;
+    box-shadow: 7px 2px 8px -4px #d1e0e0;
 }
