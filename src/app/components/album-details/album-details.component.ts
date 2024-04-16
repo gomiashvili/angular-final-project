@@ -12,17 +12,16 @@ import { ApiService } from 'src/app/services/api.service';
 export class AlbumDetailsComponent implements OnInit {
   photos!: Photos[];
   currentAlbum!: Album;
-  constructor(private apiService: ApiService, private route: ActivatedRoute) { }
+  constructor(private apiService: ApiService, private route: ActivatedRoute) {}
 
   ngOnInit() {
     this.route.data.subscribe(({ photos }) => {
       this.photos = photos;
       console.log(this.photos);
-    })
+    });
 
     // this.apiService.getAlbumById(this.currentAlbum.id).subscribe((photos) => {
     //   this.photos = photos;
     // });
   }
-
 }

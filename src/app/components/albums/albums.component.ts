@@ -7,16 +7,16 @@ import { ApiService } from 'src/app/services/api.service';
 @Component({
   selector: 'app-albums',
   templateUrl: './albums.component.html',
-  styleUrls: ['./albums.component.scss']
+  styleUrls: ['./albums.component.scss'],
 })
 export class AlbumsComponent implements OnInit {
   albums!: Album[];
   users!: User[];
   albumLength!: [];
-  total: number[] = []
+  total: number[] = [];
   totalAlbums!: number;
   photos!: Photos[];
-  constructor(private apiService: ApiService) { }
+  constructor(private apiService: ApiService) {}
 
   ngOnInit(): void {
     this.apiService.getAlbums().subscribe((albums) => {
@@ -28,15 +28,15 @@ export class AlbumsComponent implements OnInit {
     });
     this.apiService.getPhotos().subscribe((photos) => {
       this.photos = photos;
-    })
+    });
     // for (let i: number = 0; i < 100; i++) {
     //   let currentAlbum = JSON.stringify(this.apiService.getAlbumById(i));
     //   this.total.push(currentAlbum.length);
     // }
-    console.log(this.total)
+    console.log(this.total);
   }
   getNameById(nameId: number) {
-    return this.users?.find(obj => obj.id === nameId)?.name;
+    return this.users?.find((obj) => obj.id === nameId)?.name;
   }
 
   getPhotosNumber(albumId: number) {
@@ -48,5 +48,4 @@ export class AlbumsComponent implements OnInit {
   //     this.total.push(currentAlbum.length);
   //   }
   // }
-
 }
